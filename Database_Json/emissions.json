@@ -1,0 +1,66 @@
+[{
+  "_id": {
+    "$oid": "6781ae3fcf1c19a5e8f06f92"
+  },
+  "date": {
+    "$date": "2025-01-24T00:00:00.000Z"
+  },
+  "startLocation": {
+    "address": "The Queen's Walk, Butler's Wharf, The Borough, London Borough of Southwark, London, Groß-London, England, SE1 2RL, Vereinigtes Königreich",
+    "lat": 51.50496428347629,
+    "lon": -0.07809538342087806
+  },
+  "endLocation": {
+    "address": "Rue Marcel Gromaire, Quartier Saint-Ambroise, 11th Arrondissement, Paris, Île-de-France, Metropolitanes Frankreich, 75011, Frankreich",
+    "lat": 48.860095,
+    "lon": 2.3676258
+  },
+  "employee": {
+    "$oid": "677e4e8a271e2d5bd2f4150d"
+  },
+  "transportation": {
+    "$oid": "677e4ea5271e2d5bd2f41510"
+  },
+  "distance": 341.74084797028445,
+  "co2Used": 0,
+  "createdAt": {
+    "$date": "2025-01-10T23:33:19.218Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-10T23:33:19.218Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6781af05cf1c19a5e8f06fdb"
+  },
+  "date": {
+    "$date": "2025-01-15T00:00:00.000Z"
+  },
+  "startLocation": {
+    "address": "Vaughan Way Wildlife Garden, Asher Way, Quay 430, Wapping, London Borough of Tower Hamlets, London, Groß-London, England, E1W 2JB, Vereinigtes Königreich",
+    "lat": 51.5071704,
+    "lon": -0.06646180107223473
+  },
+  "endLocation": {
+    "address": "2b, Rue Moufle, Quartier Saint-Ambroise, 11th Arrondissement, Paris, Île-de-France, Metropolitanes Frankreich, 75011, Frankreich",
+    "lat": 48.8592024,
+    "lon": 2.3736405
+  },
+  "employee": {
+    "$oid": "677e4e8a271e2d5bd2f4150d"
+  },
+  "transportation": {
+    "$oid": "677e4e8a271e2d5bd2f4150b"
+  },
+  "distance": 341.8328114657366,
+  "co2Used": 0,
+  "createdAt": {
+    "$date": "2025-01-10T23:36:37.448Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-10T23:36:37.448Z"
+  },
+  "__v": 0
+}]

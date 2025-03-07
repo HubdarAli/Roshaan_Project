@@ -1,0 +1,198 @@
+[{
+  "_id": {
+    "$oid": "67818b33999310563e5b723d"
+  },
+  "transportationMode": "car",
+  "beginLocation": "789 Birchwood Drive, Seattle, WA, 98101\"",
+  "endLocation": "123 Evergreen Blvd, Suite 450, Seattle, WA, 98109",
+  "date": {
+    "$date": "2025-01-16T00:00:00.000Z"
+  },
+  "recurring": false,
+  "employeeId": {
+    "$oid": "677ecdeb8ce13a53dbd1f504"
+  },
+  "createdAt": {
+    "$date": "2025-01-10T21:03:47.018Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-10T21:03:47.018Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67819df916d9ea28799d09e4"
+  },
+  "transportationMode": "plane",
+  "beginLocation": "789 Birchwood Drive, Seattle, WA, 98101\"",
+  "endLocation": "123 Evergreen Blvd, Suite 450, Seattle, WA, 98109",
+  "date": {
+    "$date": "2025-01-18T00:00:00.000Z"
+  },
+  "recurring": true,
+  "employeeId": {
+    "$oid": "677e4e8a271e2d5bd2f4150d"
+  },
+  "createdAt": {
+    "$date": "2025-01-10T22:23:53.088Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-10T22:23:53.088Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67819dfc16d9ea28799d09e6"
+  },
+  "transportationMode": "plane",
+  "beginLocation": "789 Birchwood Drive, Seattle, WA, 98101\"",
+  "endLocation": "123 Evergreen Blvd, Suite 450, Seattle, WA, 98109",
+  "date": {
+    "$date": "2025-01-18T00:00:00.000Z"
+  },
+  "recurring": true,
+  "employeeId": {
+    "$oid": "677e4e8a271e2d5bd2f4150d"
+  },
+  "createdAt": {
+    "$date": "2025-01-10T22:23:56.815Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-10T22:23:56.815Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67819e0116d9ea28799d09e8"
+  },
+  "transportationMode": "plane",
+  "beginLocation": "789 Birchwood Drive, Seattle, WA, 98101\"",
+  "endLocation": "123 Evergreen Blvd, Suite 450, Seattle, WA, 98109",
+  "date": {
+    "$date": "2025-01-18T00:00:00.000Z"
+  },
+  "recurring": true,
+  "employeeId": {
+    "$oid": "677e4e8a271e2d5bd2f4150d"
+  },
+  "createdAt": {
+    "$date": "2025-01-10T22:24:01.331Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-10T22:24:01.331Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67819e0516d9ea28799d09ea"
+  },
+  "transportationMode": "bike",
+  "beginLocation": "789 Birchwood Drive, Seattle, WA, 98101\"",
+  "endLocation": "123 Evergreen Blvd, Suite 450, Seattle, WA, 98109",
+  "date": {
+    "$date": "2025-01-18T00:00:00.000Z"
+  },
+  "recurring": true,
+  "employeeId": {
+    "$oid": "677e4e8a271e2d5bd2f4150d"
+  },
+  "createdAt": {
+    "$date": "2025-01-10T22:24:05.044Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-10T22:24:05.044Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67819e0f16d9ea28799d09ec"
+  },
+  "transportationMode": "bike",
+  "beginLocation": "789 Birchwood Drive, Seattle, WA, 98101\"",
+  "endLocation": "123 Evergreen Blvd, Suite 450, Seattle, WA, 98109",
+  "date": {
+    "$date": "2025-01-18T00:00:00.000Z"
+  },
+  "recurring": true,
+  "employeeId": {
+    "$oid": "677e4e8a271e2d5bd2f4150d"
+  },
+  "createdAt": {
+    "$date": "2025-01-10T22:24:15.556Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-10T22:24:15.556Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67819ea816d9ea28799d09f4"
+  },
+  "transportationMode": "car",
+  "beginLocation": "789 Birchwood Drive, Seattle, WA, 98101\"",
+  "endLocation": "123 Evergreen Blvd, Suite 450, Seattle, WA, 98109",
+  "date": {
+    "$date": "2025-01-23T00:00:00.000Z"
+  },
+  "recurring": false,
+  "employeeId": {
+    "$oid": "677e4e8a271e2d5bd2f4150d"
+  },
+  "createdAt": {
+    "$date": "2025-01-10T22:26:48.051Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-10T22:26:48.051Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6781ad2bcf1c19a5e8f06f3f"
+  },
+  "transportationMode": "car",
+  "beginLocation": "789 Birchwood Drive, Seattle, WA, 98101\"",
+  "endLocation": "123 Evergreen Blvd, Suite 450, Seattle, WA, 98109",
+  "date": {
+    "$date": "2025-01-17T00:00:00.000Z"
+  },
+  "recurring": false,
+  "employeeId": {
+    "$oid": "677e4e8a271e2d5bd2f4150d"
+  },
+  "createdAt": {
+    "$date": "2025-01-10T23:28:43.313Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-10T23:28:43.313Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6781ae8acf1c19a5e8f06fa6"
+  },
+  "transportationMode": "car",
+  "beginLocation": "789 Birchwood Drive, Seattle, WA, 98101\"",
+  "endLocation": "123 Evergreen Blvd, Suite 450, Seattle, WA, 98109",
+  "date": {
+    "$date": "2025-01-25T00:00:00.000Z"
+  },
+  "recurring": false,
+  "employeeId": {
+    "$oid": "677e4e8a271e2d5bd2f4150d"
+  },
+  "createdAt": {
+    "$date": "2025-01-10T23:34:34.746Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-10T23:34:34.746Z"
+  },
+  "__v": 0
+}]

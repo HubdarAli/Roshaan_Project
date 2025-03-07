@@ -1,0 +1,102 @@
+[{
+  "_id": {
+    "$oid": "677e2a85eeeb5079dad216ba"
+  },
+  "name": "NextGen Innovatio",
+  "address": "202 Future Rd, San Francis",
+  "employees": [
+    {
+      "$oid": "677e427a1396af16c01ba62d"
+    },
+    {
+      "$oid": "677e4eb5271e2d5bd2f41516"
+    }
+  ],
+  "cars": [
+    {
+      "$oid": "677e4e8a271e2d5bd2f4150b"
+    },
+    {
+      "$oid": "677e4ea5271e2d5bd2f41510"
+    }
+  ],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2025-01-08T07:34:29.398Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-08T17:13:31.869Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "677eb6c025efc406347f7498"
+  },
+  "name": "Global Logistics Coro",
+  "address": "101 Logistics Park, Chi",
+  "employees": [
+    {
+      "$oid": "677e427a1396af16c01ba62d"
+    }
+  ],
+  "cars": [
+    {
+      "$oid": "677e4ce4271e2d5bd2f41502"
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-01-08T17:32:48.981Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-08T17:32:48.981Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677eb6ce25efc406347f74ac"
+  },
+  "name": "NextGen Innovatio",
+  "address": "101 Logistics Park, Chisdsd",
+  "employees": [
+    {
+      "$oid": "677e427a1396af16c01ba62d"
+    }
+  ],
+  "cars": [
+    {
+      "$oid": "677e4ce4271e2d5bd2f41502"
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-01-08T17:33:02.245Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-08T17:33:02.245Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6781a6e2cf1c19a5e8f06df5"
+  },
+  "name": "Global Logistics Coro",
+  "address": "101 Logistics Park, Chicago",
+  "employees": [
+    {
+      "$oid": "677ecdeb8ce13a53dbd1f504"
+    }
+  ],
+  "cars": [
+    {
+      "$oid": "677e4ce4271e2d5bd2f41502"
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-01-10T23:01:54.255Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-10T23:01:54.255Z"
+  },
+  "__v": 0
+}]

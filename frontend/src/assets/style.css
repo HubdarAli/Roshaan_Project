@@ -1,0 +1,286 @@
+/* Reset some default browser styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Global Body Styles */
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Container for consistent layout across pages */
+.container {
+  max-width: 1200px;
+  margin: 0;
+  /* padding: 20px; */
+}
+
+/* Flex utility class for centering content */
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Standard Button Styles (Use Bootstrap classes instead) */
+button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Bootstrap Card Styles */
+.card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 20px;
+  padding: 20px;
+}
+
+.card h3 {
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.card p {
+  font-size: 1rem;
+  color: #666;
+}
+
+/* Global Typography Styles */
+h1,
+h2,
+h3 {
+  color: #333;
+}
+
+/* Global Link Styles (Using Bootstrap's color classes) */
+a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+a:hover {
+  color: #0056b3;
+}
+
+.top-62 {
+  top: 69% !important;
+}
+
+.cursorPointer {
+  cursor: pointer !important;
+}
+
+.regButton {
+  color: red !important;
+  font-size: small;
+}
+
+.logButton {
+  color: rgb(47, 47, 197);
+}
+
+.dashboard-container {
+  min-height: 100vh;
+  padding-top: 2px;
+}
+
+.light-theme {
+  background-color: #f8f9fa;
+  color: #212529;
+}
+
+.dark-theme {
+  background-color: #212529;
+  color: #f8f9fa;
+}
+
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.navbar {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsiveness */
+@media screen and (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+
+  .container {
+    padding: 15px;
+  }
+}
+
+.modal-open {
+  pointer-events: none;
+  /* Disable pointer events */
+  cursor: default;
+  /* Adjust cursor */
+}
+
+.modal-open .container,
+.modal-open .card {
+  pointer-events: auto;
+  /* Allow modal content to be interactable */
+  cursor: default;
+  /* Make cursor default inside modal */
+}
+
+.list-group-item {
+  font-size: 1.1rem;
+}
+
+.bi {
+  font-size: 1.2rem;
+  color: #007bff;
+}
+
+h4 {
+  font-weight: bold;
+  color: #004085;
+}
+
+.employee-item,
+.car-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.employee-item span,
+.car-item span {
+  margin-right: 10px;
+}
+
+.employee-item .btn,
+.car-item .btn {
+  margin-left: 10px;
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.headingTitle {
+  display: flex;
+  margin-top: 20px;
+  justify-content: center;
+}
+
+/* .search-results {
+  position: absolute;
+  z-index: 1000;
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  background-color: white;
+  width: 100%;
+}
+
+.search-result-item {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.search-result-item:hover {
+  background-color: #f1f1f1;
+} */
+.form-group-spacing {
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.scrollable-address {
+  max-width: 200px;
+  max-height: 50px;
+  overflow-y: auto;
+  /* Enables vertical scrolling */
+  word-wrap: break-word;
+  /* Allow word wrapping */
+  white-space: pre-wrap;
+  /* Allows text to wrap inside the box */
+
+  border: 2px solid #007bff;
+  /* Light blue border */
+  border-radius: 5px;
+  /* Optional: rounded corners for the border */
+  padding: 5px;
+  /* Adds padding to prevent text from touching the border */
+}
+
+.scrollable-address::-webkit-scrollbar {
+  width: 8px;
+  /* Custom scrollbar width */
+}
+
+.scrollable-address::-webkit-scrollbar-thumb {
+  background-color: #007bff;
+  /* Custom scrollbar thumb color */
+  border-radius: 10px;
+  /* Rounded corners for the thumb */
+}
+
+.scrollable-address::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+  /* Custom scrollbar track color */
+}
+
+.f10 {
+  font-size: 10px;
+}
+
+.nav-link:hover {
+  color: white !important;
+  background-color: #007bff;
+}
+
+.graph-pdf-btn {
+  padding: 8px 12px;
+  cursor: pointer;
+  background: unset;
+  color: rgb(252 76 76);
+  border: none;
+  border-radius: 5px;
+  position: absolute;
+  top: 6%;
+  right: 12%;
+  z-index: 10;
+}
+
+.graph-pdf-btn:hover{
+    background-color: unset;
+    color: rgb(247 0 0);
+}

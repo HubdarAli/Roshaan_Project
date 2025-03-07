@@ -1,0 +1,175 @@
+[{
+  "_id": {
+    "$oid": "677e427a1396af16c01ba62b"
+  },
+  "name": "Toyota Corolla",
+  "type": "car",
+  "licensePlate": "ABC1-234XY",
+  "companyCar": false,
+  "createdAt": {
+    "$date": "2025-01-08T09:16:42.365Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-08T10:23:05.151Z"
+  },
+  "__v": 0,
+  "employeeId": {
+    "$oid": "677e427a1396af16c01ba62d"
+  }
+},
+{
+  "_id": {
+    "$oid": "677e4ce4271e2d5bd2f41502"
+  },
+  "name": "Ford Mustang",
+  "type": "car",
+  "licensePlate": "XYZ5-678LM",
+  "companyCar": false,
+  "createdAt": {
+    "$date": "2025-01-08T10:01:08.758Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-08T10:01:08.774Z"
+  },
+  "__v": 0,
+  "employeeId": {
+    "$oid": "677e4ce4271e2d5bd2f41504"
+  }
+},
+{
+  "_id": {
+    "$oid": "677e4e8a271e2d5bd2f4150b"
+  },
+  "name": "Chevrolet Malibu",
+  "type": "car",
+  "licensePlate": "CHV9-876KL",
+  "companyCar": false,
+  "createdAt": {
+    "$date": "2025-01-08T10:08:10.375Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-08T10:08:10.454Z"
+  },
+  "__v": 0,
+  "employeeId": {
+    "$oid": "677e4e8a271e2d5bd2f4150d"
+  }
+},
+{
+  "_id": {
+    "$oid": "677e4ea5271e2d5bd2f41510"
+  },
+  "name": "Tesla Model S",
+  "type": "car",
+  "licensePlate": "TSM0-123EF",
+  "companyCar": false,
+  "createdAt": {
+    "$date": "2025-01-08T10:08:37.363Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-08T10:08:37.363Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e4eb5271e2d5bd2f41514"
+  },
+  "name": "Nissan Altima",
+  "type": "car",
+  "licensePlate": "NSN6-789RE",
+  "companyCar": false,
+  "createdAt": {
+    "$date": "2025-01-08T10:08:53.425Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-08T10:08:53.431Z"
+  },
+  "__v": 0,
+  "employeeId": {
+    "$oid": "677e4eb5271e2d5bd2f41516"
+  }
+},
+{
+  "_id": {
+    "$oid": "677ebb3d2e8057dee079b9df"
+  },
+  "name": "ssss",
+  "type": "car",
+  "licensePlate": "JMD-299",
+  "companyCar": false,
+  "createdAt": {
+    "$date": "2025-01-08T17:51:57.832Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-08T17:51:57.832Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677ec1f02e8057dee079ba3a"
+  },
+  "name": "ss",
+  "type": "car",
+  "licensePlate": "sss",
+  "createdAt": {
+    "$date": "2025-01-08T18:20:32.585Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-08T18:20:32.585Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677ec1ff2e8057dee079ba3d"
+  },
+  "name": "Honda",
+  "type": "car",
+  "licensePlate": "HJO9-57654",
+  "createdAt": {
+    "$date": "2025-01-08T18:20:47.915Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-08T19:24:47.186Z"
+  },
+  "__v": 0,
+  "employeeId": {
+    "$oid": "677ec1ff2e8057dee079ba3f"
+  },
+  "companyCar": true
+},
+{
+  "_id": {
+    "$oid": "6781a59601fc5405f51294fa"
+  },
+  "name": "ksds",
+  "type": "car",
+  "licensePlate": "shjs",
+  "createdAt": {
+    "$date": "2025-01-10T22:56:22.466Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-10T22:56:22.466Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6781a613cf1c19a5e8f06d95"
+  },
+  "name": "ksds",
+  "type": "car",
+  "licensePlate": "shjs",
+  "createdAt": {
+    "$date": "2025-01-10T22:58:27.803Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-10T22:58:27.817Z"
+  },
+  "__v": 0,
+  "employeeId": {
+    "$oid": "6781a613cf1c19a5e8f06d97"
+  }
+}]

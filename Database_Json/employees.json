@@ -1,0 +1,44 @@
+[{
+  "_id": {
+    "$oid": "677e4e8a271e2d5bd2f4150d"
+  },
+  "firstName": "Ethen",
+  "lastName": "William",
+  "homeAddress": "789 Birchwood Drive, Seattle, WA, 98101\"",
+  "companyAddress": "123 Evergreen Blvd, Suite 450, Seattle, WA, 98109",
+  "email": "ethan.williams@example.com",
+  "password": "P@ssw0rd123",
+  "car": {
+    "$oid": "677e4e8a271e2d5bd2f4150b"
+  },
+  "jwtToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzdlNGU4YTI3MWUyZDViZDJmNDE1MGQiLCJpYXQiOjE3MzYzMzA4OTAsImV4cCI6MTczNjMzNDQ5MH0.yj__UtMQzZ4RK5Eq2u4BMd-01iWhyQowvxo5NcpC_us",
+  "createdAt": {
+    "$date": "2025-01-08T10:08:10.450Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-10T23:34:54.636Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677ecdeb8ce13a53dbd1f504"
+  },
+  "firstName": "Olivia",
+  "lastName": "Carter",
+  "homeAddress": "456 Maple Lane, Portland, OR, 97201",
+  "companyAddress": "789 Pine Street, Suite 210, Portland, OR, 97204",
+  "email": "olivia.carter@example.com",
+  "password": "Ol1via$ecure!",
+  "car": {
+    "$oid": "677ec1ff2e8057dee079ba3d"
+  },
+  "jwtToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzdlYzFmZjJlODA1N2RlZTA3OWJhM2YiLCJpYXQiOjE3MzYzNjA0NDcsImV4cCI6MTczNjM2NDA0N30._FOfSItVIuNTTT5O3zFVudyMB7jiZXbs851RJi04rmM",
+  "createdAt": {
+    "$date": "2025-01-08T10:08:10.450Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-10T22:55:53.575Z"
+  },
+  "__v": 0
+}]

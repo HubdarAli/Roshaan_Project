@@ -1,0 +1,99 @@
+[{
+  "_id": {
+    "$oid": "67814fb1a0b745283df8acc7"
+  },
+  "date": {
+    "$date": "2025-01-11T00:00:00.000Z"
+  },
+  "startLocation": {
+    "address": "Roman Southwark, Gaitskell Way, The Borough, London Borough of Southwark, London, Groß-London, England, SE1 1EF, Vereinigtes Königreich",
+    "lat": 51.5039477,
+    "lon": -0.09196686087291611
+  },
+  "endLocation": {
+    "address": "Dr Feelgood, 74, Rue de la Roquette, Quartier de la Roquette, 11th Arrondissement, Paris, Île-de-France, Metropolitanes Frankreich, 75011, Frankreich",
+    "lat": 48.8557579,
+    "lon": 2.3753418
+  },
+  "employee": {
+    "$oid": "677e4e8a271e2d5bd2f4150d"
+  },
+  "transportation": {
+    "$oid": "677e4ce4271e2d5bd2f41502"
+  },
+  "distance": 342.8477947879936,
+  "co2Used": 0,
+  "createdAt": {
+    "$date": "2025-01-10T16:49:53.207Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-10T16:49:53.207Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67814fefa0b745283df8acd5"
+  },
+  "date": {
+    "$date": "2025-01-11T00:00:00.000Z"
+  },
+  "startLocation": {
+    "address": "Roman Southwark, Gaitskell Way, The Borough, London Borough of Southwark, London, Groß-London, England, SE1 1EF, Vereinigtes Königreich",
+    "lat": 51.5039477,
+    "lon": -0.09196686087291611
+  },
+  "endLocation": {
+    "address": "Dr Feelgood, 74, Rue de la Roquette, Quartier de la Roquette, 11th Arrondissement, Paris, Île-de-France, Metropolitanes Frankreich, 75011, Frankreich",
+    "lat": 48.8557579,
+    "lon": 2.3753418
+  },
+  "employee": {
+    "$oid": "677ecdeb8ce13a53dbd1f504"
+  },
+  "transportation": {
+    "$oid": "677e4ce4271e2d5bd2f41502"
+  },
+  "distance": 342.8477947879936,
+  "co2Used": 0,
+  "createdAt": {
+    "$date": "2025-01-10T16:50:55.453Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-10T16:50:55.453Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67814ffba0b745283df8acdd"
+  },
+  "date": {
+    "$date": "2025-01-11T00:00:00.000Z"
+  },
+  "startLocation": {
+    "address": "Tower Millennium Pier, Tower Wharf, Tower Hill, Wapping, London Borough of Tower Hamlets, London, Groß-London, England, EC3N 4AB, Vereinigtes Königreich",
+    "lat": 51.5072719,
+    "lon": -0.0788908
+  },
+  "endLocation": {
+    "address": "23, Avenue Gabriel Péri, Centre Ville, Vincennes, Nogent-sur-Marne, Val-de-Marne, Île-de-France, Metropolitanes Frankreich, 94300, Frankreich",
+    "lat": 48.8471563,
+    "lon": 2.4423278
+  },
+  "employee": {
+    "$oid": "677ecdeb8ce13a53dbd1f504"
+  },
+  "transportation": {
+    "$oid": "677e4e8a271e2d5bd2f4150b"
+  },
+  "distance": 345.96630310568423,
+  "co2Used": 0,
+  "createdAt": {
+    "$date": "2025-01-10T16:51:07.077Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-10T16:51:07.077Z"
+  },
+  "__v": 0
+}]

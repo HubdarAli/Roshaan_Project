@@ -1,0 +1,17 @@
+[{
+  "_id": {
+    "$oid": "677d81fc514db45c144072af"
+  },
+  "username": "James",
+  "email": "admin@gmail.com",
+  "password": "Password02",
+  "role": "admin",
+  "jwtToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzdkODFmYzUxNGRiNDVjMTQ0MDcyYWYiLCJyb2xlIjoidXNlciIsImlhdCI6MTczNjI3ODUyNCwiZXhwIjoxNzM2MjgyMTI0fQ.PM3BuRh9Bxna0YZQtqTGSFnxKYngvv5KTIVqWrfW_rI",
+  "createdAt": {
+    "$date": "2025-01-07T19:35:24.498Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-07T19:35:24.498Z"
+  },
+  "__v": 0
+}]
