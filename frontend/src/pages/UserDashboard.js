@@ -2,10 +2,16 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { JWT_ADMIN_SECRET, REACT_APP_API_URL } from "../env";
+import {
+  JWT_ADMIN_SECRET,
+  JWT_EMPLOYEE_SECRET,
+  REACT_APP_API_URL,
+} from "../env";
 import UpdateEmployee from "./UpdateEmployee";
 import Select from "react-select";
 import TransportEmissions from "./TransportEmissions";
+import { FaPlusCircle } from "react-icons/fa";
+import VehicleRegisterPage from "./VehicleRegister";
 
 const DashboardPage = () => {
   const customStyles = {
@@ -71,7 +77,86 @@ const DashboardPage = () => {
     date: "",
   });
   const [selectedResourceId, setSelectedResourceId] = useState(null);
+  const [isRegModel, setIsRegModel] = useState(false);
+  const [isModalVisible, setModalVisible] = useState(null);
+  const [error, setError] = useState(null);
+  const [vehicles, setVehicles] = useState([]);
+  const toggleFavorite = async (vehicleId, index) => {
+    try {
+      const response = await fetch(
+        `${REACT_APP_API_URL}/vehicles/${vehicleId}/favorite`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${JWT_EMPLOYEE_SECRET}`, // Include token for authentication
+          },
+        }
+      );
 
+      if (!response.ok) {
+        throw new Error("Failed to mark favorite");
+      }
+
+      const data = await response.json();
+      console.log("Favorite updated:", data);
+
+      // ✅ Update state locally after successful API response
+      setVehicles((prevVehicles) => {
+        const updatedVehicles = [...prevVehicles];
+        updatedVehicles[index] = {
+          ...updatedVehicles[index],
+          isFavorite: data.vehicle.isFavorite,
+        };
+        return updatedVehicles;
+      });
+    } catch (err) {
+      console.error("Error marking favorite:", err);
+    }
+  };
+
+  const fetchVehicles = async () => {
+    try {
+      const response = await fetch(`${REACT_APP_API_URL}/vehicles`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${JWT_ADMIN_SECRET}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch vehicles");
+      }
+
+      const data = await response.json();
+
+      if (!Array.isArray(data)) {
+        throw new Error("Invalid response format");
+      }
+
+      setVehicles(data);
+    } catch (err) {
+      console.error("Error fetching vehicles:", err.message);
+      setError(err.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchVehicles();
+  }, []);
+
+  useEffect(() => {
+    fetchVehicles();
+  }, []);
+  const regVehicle = (e) => {
+    setIsRegModel(e);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+    setIsRegModel(false);
+  };
   useEffect(() => {
     const handleFetchRecords = async () => {
       try {
@@ -558,7 +643,13 @@ const DashboardPage = () => {
                 >
                   <i className="fas fa-car"></i> Add New Work Transport
                 </button>
-
+                <button
+                  className="btn btn-outline-primary me-2"
+                  onClick={() => regVehicle(true)}
+                >
+                  <FaPlusCircle className="me-2" />
+                  Register Vehicle
+                </button>
                 <button
                   className="btn btn-outline-primary me-2"
                   onClick={handleAddOtherResource}
@@ -664,7 +755,19 @@ const DashboardPage = () => {
             }`}
             onClick={() => setActiveTab("TransportEmissions")}
           >
-           Monthly Transport Emissions
+            Monthly Transport Emissions
+          </button>
+        </li>
+        <li className="nav-item">
+          <button
+            className={`nav-link ${
+              activeTab === "Manage Vehicles"
+                ? "active bg-primary text-white"
+                : ""
+            }`}
+            onClick={() => setActiveTab("Manage Vehicles")}
+          >
+            Manage Vehicles
           </button>
         </li>
       </ul>
@@ -849,6 +952,67 @@ const DashboardPage = () => {
             </table>
           </div>
         </>
+      )}
+      {activeTab === "Manage Vehicles" && (
+        <div className="container py-2">
+          <div className="table-responsive">
+            <div className="d-flex justify-content-between align-items-center">
+              <p>Total: {vehicles.length}</p>
+            </div>
+            <table className="table table-striped table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Home Address</th>
+                  <th>Company Address</th>
+                  <th>Transportation Mode</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {vehicles.length > 0 ? (
+                  vehicles.map((vehicle, index) => (
+                    <tr key={vehicle._id}>
+                      <td>{index + 1}</td>
+                      <td>{`${vehicle.firstName} ${vehicle.lastName}`}</td>
+                      <td>{vehicle.homeAddress}</td>
+                      <td>{vehicle.companyAddress}</td>
+                      <td>{vehicle.car?.name || "N/A"}</td>
+                      <td>
+                        <button
+                          className={`btn w-100 p-8   ${
+                            vehicle.isFavorite
+                              ? "btn-warning"
+                              : "btn-outline-primary"
+                          }`}
+                          onClick={() => toggleFavorite(vehicle._id, index)}
+                        >
+                          {vehicle.isFavorite
+                            ? "★ Favorite"
+                            : "☆ Mark as Favorite"}
+                        </button>
+
+                        {/* <button className="btn btn-info btn-sm me-2" onClick={() => editVehicle(vehicle)}>
+                                Edit
+                              </button>
+                              <button className="btn btn-danger btn-sm" onClick={() => deleteVehicle(vehicle._id)}>
+                                Delete
+                              </button> */}
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="6" className="text-center text-muted">
+                      No records found
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
       )}
       <TransportEmissions activeTab={activeTab} />
       {isTransportationModalVisible && (
@@ -1428,6 +1592,39 @@ const DashboardPage = () => {
                     </button>
                   </div>
                 </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* Register Vehicle Modal */}
+      {isRegModel && (
+        <div
+          className="modal fade show"
+          tabIndex="-1"
+          style={{ display: "block" }}
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog modal-lg" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="exampleModalLabel">
+                  Vehicle Registration
+                </h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  onClick={closeModal}
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div className="modal-body">
+                <VehicleRegisterPage
+                  userData={isRegModel}
+                  isModalVisible={false}
+                  isAdmin={true}
+                />
               </div>
             </div>
           </div>
