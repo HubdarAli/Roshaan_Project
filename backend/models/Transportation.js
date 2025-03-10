@@ -10,6 +10,11 @@ const transportationSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId, // Reference to the Employee model
       ref: "Employee", // This establishes a relationship with the Employee model
     },
+    vehicleId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Vehicle", // Reference to Vehicle model
+    },
+    vehicleId: { type: mongoose.Schema.Types.ObjectId, ref: "Vehicle" },
   },
   { timestamps: true }
 );

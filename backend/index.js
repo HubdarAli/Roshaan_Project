@@ -10,6 +10,7 @@ const dotEnv = process.env;
 const authRoutes = require("./routes/auth");
 const dashboardRoutes = require("./routes/dashboard");
 const employeeRoutes = require("./routes/employee");
+const vehicleRoutes=require("./routes/Vehicle")
 const companyRoutes = require("./routes/company");
 const emissionRoutes = require("./routes/emission");
 const employeeTransportation = require("./routes/employeeTransportation");
@@ -39,6 +40,7 @@ app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/employees", employeeRoutes);
 app.use("/api/companies", companyRoutes);
 app.use("/api/emissions", emissionRoutes);
+app.use("/api/vehicles", vehicleRoutes);
 app.use("/api/employeeTransportations", employeeTransportation);
 app.use("/api/employeeWorkTransportations", employeeWorkTransportation);
 app.use("/api/transportations", transportationRoutes);

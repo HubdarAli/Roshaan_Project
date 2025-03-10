@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { REACT_APP_API_URL } from "../env";
-import Chart from 'react-apexcharts';
+import Chart from "react-apexcharts";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 
@@ -19,6 +19,7 @@ const DashboardPage = () => {
   const [employeeCount, setEmployeeCount] = useState(0);
   const [companyCount, setCompanyCount] = useState(0);
   const [emissionsCount, setEmissionsCount] = useState(0);
+  const [vehicle, setVehicle] = useState(0);
 
   const [co2Reduction, setco2Reduction] = useState({
     chart: {
@@ -79,8 +80,16 @@ const DashboardPage = () => {
       },
     },
     colors: [
-      "#E74C3C", "#3498DB", "#2ECC71", "#F1C40F", "#9B59B6",
-      "#1ABC9C", "#E67E22", "#D35400", "#34495E", "#7F8C8D"
+      "#E74C3C",
+      "#3498DB",
+      "#2ECC71",
+      "#F1C40F",
+      "#9B59B6",
+      "#1ABC9C",
+      "#E67E22",
+      "#D35400",
+      "#34495E",
+      "#7F8C8D",
     ],
     // dataLabels: { enabled: false },
     legend: {
@@ -90,7 +99,7 @@ const DashboardPage = () => {
 
   const [co2EmissionsByDateSeries, setCo2EmissionsByDateSeries] = useState([]);
 
-  // CO2 Emissions by Category 
+  // CO2 Emissions by Category
   const [co2EmissionsByCategory, setco2EmissionsByCategory] = useState({
     chart: {
       type: "pie",
@@ -107,10 +116,10 @@ const DashboardPage = () => {
     legend: {
       position: "bottom",
     },
-
   });
 
-  const [co2EmissionsByCategorySeries, setco2EmissionsByCategorySeries] = useState([]);
+  const [co2EmissionsByCategorySeries, setco2EmissionsByCategorySeries] =
+    useState([]);
 
   const [co2EmissionsTrend, setCo2EmissionsTrend] = useState({
     chart: {
@@ -118,7 +127,6 @@ const DashboardPage = () => {
         minWidth: 100,
       },
       zoom: { enabled: false },
-
     },
     title: {
       text: "CO2 Emissions Trend ",
@@ -129,7 +137,7 @@ const DashboardPage = () => {
       tickInterval: 365 * 24 * 3600 * 1000, // 1 year interval
       labels: {
         format: "{value:%Y}", // Shows year (e.g., 2024, 2025)
-      }
+      },
     },
     yAxis: [
       {
@@ -187,15 +195,12 @@ const DashboardPage = () => {
         //   radius: 4,
         // },
       },
-
     ],
     stroke: {
       curve: "smooth",
       width: 3,
     },
   });
-
-
   useEffect(() => {
     document.body.className = `${theme}-theme`;
 
@@ -220,7 +225,6 @@ const DashboardPage = () => {
         Authorization: `Bearer ${token}`,
       };
 
-      // Helper function to fetch data
       const fetchData = async (url, errorMessage) => {
         try {
           const response = await fetch(url, { method: "GET", headers });
@@ -235,61 +239,84 @@ const DashboardPage = () => {
       };
 
       try {
-        const [employeeData, companyData, emissionsData, redutionOverTime, emissionsByDate, emissionsByCategory, emissionsTrend] = await Promise.all([
+        const [
+          employeeData,
+          companyData,
+          emissionsData,
+          vehiclesData,
+          redutionOverTime,
+          emissionsByDate,
+          emissionsByCategory,
+          emissionsTrend,
+        ] = await Promise.all([
           fetchData(
             `${REACT_APP_API_URL}/employees`,
-            "Failed to fetch employee count"
+            "Failed to fetch employees"
           ),
           fetchData(
             `${REACT_APP_API_URL}/companies`,
-            "Failed to fetch company count"
+            "Failed to fetch companies"
           ),
           fetchData(
             `${REACT_APP_API_URL}/emissions`,
-            "Failed to fetch emissions count"
+            "Failed to fetch emissions"
           ),
-
-          //dashboard graphs services
+          fetchData(
+            `${REACT_APP_API_URL}/vehicles`,
+            "Failed to fetch vehicles"
+          ),
           fetchData(
             `${REACT_APP_API_URL}/dashboard/redution-over-time`,
-            "Failed to fetch redution-over-time count"
+            "Failed to fetch redution-over-time"
           ),
           fetchData(
             `${REACT_APP_API_URL}/dashboard/emissions-by-date`,
-            "Failed to fetch emissions-by-date count"
+            "Failed to fetch emissions-by-date"
           ),
           fetchData(
             `${REACT_APP_API_URL}/dashboard/emissions-by-category`,
-            "Failed to fetch emissions-by-category count"
+            "Failed to fetch emissions-by-category"
           ),
           fetchData(
             `${REACT_APP_API_URL}/dashboard/emissions-trend`,
-            "Failed to fetch emissions-trend count"
+            "Failed to fetch emissions-trend"
           ),
         ]);
 
-        console.log("emissionsTrend:", emissionsTrend);
-        // Update state with fetched data
+        console.log("API Responses:", {
+          redutionOverTime,
+          emissionsTrend,
+          emissionsByCategory,
+        });
+
         setEmployeeCount(employeeData?.length || 0);
         setCompanyCount(companyData?.length || 0);
         setEmissionsCount(emissionsData?.length || 0);
+        setVehicle(vehiclesData?.length || 0);
 
-        const dateArray = redutionOverTime.map(item => {
+        // **Handle undefined data before using map()**
+        const dateArray = (redutionOverTime || []).map((item) => {
+          if (!item?.date) return "";
           const [year, month] = item.date.split("-");
-          return new Date(year, month - 1).toLocaleString("en-US", { month: "short", year: "numeric" }).replace(" ", "-");
+          return new Date(year, month - 1)
+            .toLocaleString("en-US", { month: "short", year: "numeric" })
+            .replace(" ", "-");
         });
-        const recordsArray = redutionOverTime.map(item => item.total_emission);
 
-        setco2Reduction(prev => ({
+        const recordsArray = (redutionOverTime || []).map(
+          (item) => item.total_emission || 0
+        );
+
+        setco2Reduction((prev) => ({
           ...prev,
           xaxis: { ...prev.xaxis, categories: dateArray },
-          series: [{ name: "Total Records", data: recordsArray }]
+          series: [{ name: "Total Records", data: recordsArray }],
         }));
 
-        const dateByArray = emissionsByDate.map(item => {
-          const fullDate = dateFormat(item.date);
-          return { x: fullDate, y: item.total_emissions };
-        });
+        const dateByArray = (emissionsByDate || []).map((item) => ({
+          x: dateFormat(item?.date || ""),
+          y: item?.total_emissions || 0,
+        }));
 
         setCo2EmissionsByDateSeries([
           {
@@ -298,15 +325,23 @@ const DashboardPage = () => {
           },
         ]);
 
-
-        setco2EmissionsByCategory(prev => ({
+        setco2EmissionsByCategory((prev) => ({
           ...prev,
-          labels: emissionsByCategory.map(item => item.categoryTitle),
+          labels: (emissionsByCategory || []).map(
+            (item) => item?.categoryTitle || ""
+          ),
         }));
-        setco2EmissionsByCategorySeries(emissionsByCategory.map(item => item.totalEmissions));
 
-        const emissionsDataArray = emissionsTrend.map(item => [item.year, item.totalEmissions]);
-        setCo2EmissionsTrend(prevState => ({
+        setco2EmissionsByCategorySeries(
+          (emissionsByCategory || []).map((item) => item?.totalEmissions || 0)
+        );
+
+        const emissionsDataArray = (emissionsTrend || []).map((item) => [
+          item.year || "",
+          item.totalEmissions || 0,
+        ]);
+
+        setCo2EmissionsTrend((prevState) => ({
           ...prevState,
           series: [{ ...prevState.series[0], data: emissionsDataArray }],
         }));
@@ -352,24 +387,24 @@ const DashboardPage = () => {
       { ref: co2ReductionRef },
       { ref: co2EmissionsByDateRef },
       { ref: co2EmissionsByCategoryRef },
-      { ref: co2EmissionsTrendRef},
+      { ref: co2EmissionsTrendRef },
     ];
-  
+
     for (let i = 0; i < charts.length; i++) {
       const { ref } = charts[i];
-  
+
       if (!ref.current) continue;
-  
+
       const canvas = await html2canvas(ref.current, { scale: 2 });
       const imgData = canvas.toDataURL("image/png");
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-  
+
       if (i !== 0) pdf.addPage(); // Add a new page for each chart except the first
       pdf.setFontSize(16);
       pdf.addImage(imgData, "PNG", 10, 20, pdfWidth - 20, pdfHeight - 20);
     }
-  
+
     pdf.save("All_CO2_Emissions_Charts.pdf");
   };
 
@@ -380,8 +415,8 @@ const DashboardPage = () => {
     const year = fullDate.getFullYear();
 
     return `${day}-${month}-${year}`;
-  }
-  
+  };
+
   return (
     <div className={`dashboard-container bg-${theme}`}>
       <nav
@@ -433,8 +468,9 @@ const DashboardPage = () => {
           {/* Employees Card */}
           <div className="col-md-4">
             <div
-              className={`card shadow-lg h-100 bg-${theme} text-${theme === "light" ? "dark" : "light"
-                } rounded-3`}
+              className={`card shadow-lg h-100 bg-${theme} text-${
+                theme === "light" ? "dark" : "light"
+              } rounded-3`}
             >
               <div className="card-header d-flex align-items-center">
                 <i className="fas fa-users fa-2x me-3"></i>
@@ -462,8 +498,9 @@ const DashboardPage = () => {
           {/* Companies Card */}
           <div className="col-md-4">
             <div
-              className={`card shadow-lg h-100 bg-${theme} text-${theme === "light" ? "dark" : "light"
-                } rounded-3`}
+              className={`card shadow-lg h-100 bg-${theme} text-${
+                theme === "light" ? "dark" : "light"
+              } rounded-3`}
             >
               <div className="card-header d-flex align-items-center">
                 <i className="fas fa-users fa-2x me-3"></i>
@@ -487,12 +524,40 @@ const DashboardPage = () => {
               </div>
             </div>
           </div>
+          {/* Regular User Information 
+
+           <div className="col-md-4">
+            <div
+              className={`card shadow-lg h-100 bg-${theme} text-${
+                theme === "light" ? "dark" : "light"
+              } rounded-3`}
+            >
+              <div className="card-header d-flex align-items-center">
+                <i className="fas fa-users fa-2x me-3"></i>
+                <h4 className="card-title mb-0">User</h4>
+              </div>
+              <div className="card-body text-center">
+                <p className="card-text mt-2">
+                  <span className="text-muted">User Information</span>
+                </p>
+              </div>
+              <div className="card-footer text-center">
+                <button
+                  className="btn btn-info w-100"
+                  onClick={() => navigate("/user-dashboard")}
+                >
+                  Manage Regular User
+                </button>
+              </div>
+            </div>
+          </div> */}
 
           {/* Emission Records Card */}
           <div className="col-md-4">
             <div
-              className={`card shadow-lg h-100 bg-${theme} text-${theme === "light" ? "dark" : "light"
-                } rounded-3`}
+              className={`card shadow-lg h-100 bg-${theme} text-${
+                theme === "light" ? "dark" : "light"
+              } rounded-3`}
             >
               <div className="card-header d-flex align-items-center">
                 <i className="fas fa-chart-line fa-2x me-3"></i>
@@ -519,8 +584,9 @@ const DashboardPage = () => {
           {/* Emission Type Card */}
           <div className="col-md-4">
             <div
-              className={`card shadow-lg h-100 bg-${theme} text-${theme === "light" ? "dark" : "light"
-                } rounded-3`}
+              className={`card shadow-lg h-100 bg-${theme} text-${
+                theme === "light" ? "dark" : "light"
+              } rounded-3`}
             >
               <div className="card-header d-flex align-items-center">
                 <i className="fas fa-chart-line fa-2x me-3"></i>
@@ -544,23 +610,53 @@ const DashboardPage = () => {
               </div>
             </div>
           </div>
+          {/* Vehicle Card  */}
+          <div className="col-md-4">
+            <div
+              className={`card shadow-lg h-100 bg-${theme} text-${
+                theme === "light" ? "dark" : "light"
+              } rounded-3`}
+            >
+              <div className="card-header d-flex align-items-center">
+                <i className="fas fa-car fa-2x me-3"></i>
+                <h4 className="card-title mb-0">Vehicles</h4>
+              </div>
+              <div className="card-body text-center">
+                <div className="display-4 font-weight-bold mt-2">{vehicle}</div>
+                <p className="card-text mt-2">
+                  <span className="text-muted">Total Vehicles</span>
+                </p>
+              </div>
+              <div className="card-footer text-center">
+                <button
+                  className="btn btn-info w-100 rounded-pill shadow-sm"
+                  onClick={() => navigate("/vehicles")}
+                >
+                  Manage Vehicles
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* graph work */}
 
         <div className="row mt-3">
           <div className="col-12">
-            <button onClick={downloadAllPDFs} className="btn btn-info float-end mx-3">
+            <button
+              onClick={downloadAllPDFs}
+              className="btn btn-info float-end mx-3"
+            >
               <i className="fas fa-file-pdf"></i> Download All Graphs
             </button>
           </div>
         </div>
         <div className="row mt-3 mb-5">
           <div className="col-md-6">
-
             <div
-              className={`card shadow-lg h-100 bg-${theme} text-${theme === "light" ? "dark" : "light"
-                } rounded-3`}
+              className={`card shadow-lg h-100 bg-${theme} text-${
+                theme === "light" ? "dark" : "light"
+              } rounded-3`}
             >
               <div className="card-body text-center">
                 <div className="report-chart">
@@ -582,8 +678,9 @@ const DashboardPage = () => {
           </div>
           <div className="col-md-6">
             <div
-              className={`card shadow-lg h-100 bg-${theme} text-${theme === "light" ? "dark" : "light"
-                } rounded-3`}
+              className={`card shadow-lg h-100 bg-${theme} text-${
+                theme === "light" ? "dark" : "light"
+              } rounded-3`}
             >
               <div className="card-body text-center">
                 <div className="report-chart">
@@ -605,8 +702,9 @@ const DashboardPage = () => {
           </div>
           <div className="col-md-6 mt-2">
             <div
-              className={`card shadow-lg h-100 bg-${theme} text-${theme === "light" ? "dark" : "light"
-                } rounded-3`}
+              className={`card shadow-lg h-100 bg-${theme} text-${
+                theme === "light" ? "dark" : "light"
+              } rounded-3`}
             >
               <div className="card-body text-center">
                 <div className="report-chart">
@@ -629,24 +727,27 @@ const DashboardPage = () => {
 
           <div className="col-md-6 mt-2">
             <div
-              className={`card shadow-lg h-100 bg-${theme} text-${theme === "light" ? "dark" : "light"
-                } rounded-3`}
+              className={`card shadow-lg h-100 bg-${theme} text-${
+                theme === "light" ? "dark" : "light"
+              } rounded-3`}
             >
-
               <div className="card-body text-center">
-
                 <div className="report-chart">
                   {/* <button onClick={() => downloadPDF(co2EmissionsTrendRef, "CO2 Emissions Trend")} className="graph-pdf-btn">
                     <i className="fas fa-file-pdf"></i>
                   </button> */}
                   <div className="" ref={co2EmissionsTrendRef}>
-                    <Chart options={co2EmissionsTrend} series={co2EmissionsTrend.series} type="line" height={350} />
+                    <Chart
+                      options={co2EmissionsTrend}
+                      series={co2EmissionsTrend.series}
+                      type="line"
+                      height={350}
+                    />
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
         </div>
         {/* end graph work */}
       </div>
