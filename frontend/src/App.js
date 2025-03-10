@@ -10,6 +10,8 @@ import Registration from "./pages/Registration";
 import EmissionTypesPage from "./pages/EmissionTypes";
 import EnergyEmissions from "./pages/EnergyEmissions";
 import TransportEmissions from "./pages/TransportEmissions";
+import VehiclePage from "./pages/Vehicles";
+import VehicleRegisterPage from "./pages/VehicleRegister";
 
 const App = () => {
   return (
@@ -24,6 +26,10 @@ const App = () => {
       <Route path="/emission-types" element={<EmissionTypesPage />} />
       <Route path="/energy-emissions" element={<EnergyEmissions />} />
       <Route path="/transport-emissions" element={<TransportEmissions />} />
+      <Route path="/vehicles" element={<VehiclePage />} />
+      <Route path="/vehicle-register" element={<VehicleRegisterPage />} />
+
+      
     </Routes>
   );
 };
