@@ -18,9 +18,9 @@ exports.getAll = async (req, res) => {
 // ✅ Create a new energy emission record
 exports.createEnergyEmission = async (req, res) => {
     try {
-        const { userId, month, year, energySources } = req.body;
+        const { userId, startDate, endDate, energySources } = req.body;
 
-        if (!userId || !month || !year || !energySources.length) {
+        if (!userId || !startDate || !energySources.length) {
             return res.status(400).json({ message: "All fields are required" });
         }
 
@@ -29,7 +29,7 @@ exports.createEnergyEmission = async (req, res) => {
             energySources = JSON.parse(energySources);
         }
 
-        const emission = new EnergyEmission({ userId, month, year, energySources });
+        const emission = new EnergyEmission({ userId, startDate, endDate, energySources });
 
         await emission.save();
         res.status(201).json({ message: "Energy emission saved successfully", emission });
@@ -41,8 +41,8 @@ exports.createEnergyEmission = async (req, res) => {
 // ✅ Get emissions for a specific user and month
 exports.getEnergyEmission = async (req, res) => {
     try {
-        const { userId, year, month } = req.params;
-        const emission = await EnergyEmission.findOne({ userId, year, month });
+        const { userId, startDate, endDate } = req.params;
+        const emission = await EnergyEmission.findOne({ userId, startDate, endDate });
 
         if (!emission) return res.status(404).json({ message: "No data found" });
 

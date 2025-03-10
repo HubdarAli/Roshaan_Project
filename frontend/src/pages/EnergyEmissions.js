@@ -10,8 +10,8 @@ const EnergyEmissions = () => {
 
     const [emissionRecord, setEmissionRecord] = useState({
         userId: `${user._id}`,
-        month: "",
-        year: "",
+        startDate: "",
+        endDate: "",
         energySources: [{ type: "", emission: "" }],
     });
 
@@ -107,8 +107,8 @@ const EnergyEmissions = () => {
     const handleAdd = () => {
         setEmissionRecord({
             userId: `${user._id}`, // User ID (can be set based on auth)
-            month: "",
-            year: "",
+            startDate: "",
+            endDate: "",
             energySources: [{ type: "", emission: "" }],
         });
         setShowAddModal(true);
@@ -123,6 +123,8 @@ const EnergyEmissions = () => {
 
         setEmissionRecord({
             userId: `${user._id}`,
+            startDate: record.startDate,
+            endDate: record.endDate,
             month: record.month,
             year: record.year,
             energySources: record.energySources.map((source) => ({
@@ -224,7 +226,23 @@ const EnergyEmissions = () => {
         }));
     };
 
+    const formatDate = (isoString) => {
+        if (!isoString) return ""; // Handle empty or undefined values
+        return new Date(isoString).toISOString().split("T")[0];
+    };
+    
+    const formatDateForListing = (isoString) => {
+        if (!isoString) return ""; // Handle empty or undefined values
+    
+        const date = new Date(isoString);
+        return date.toLocaleDateString("en-GB", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+        });
+    };
 
+    
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -254,8 +272,10 @@ const EnergyEmissions = () => {
                             <tr>
                                 <th>#</th>
                                 {/* <th>User ID</th> */}
-                                <th>Month</th>
-                                <th>Year</th>
+                                {/* <th>Month</th> */}
+                                {/* <th>Year</th> */}
+                                <th>Start Date</th>
+                                <th>End Date</th>
                                 <th>Energy Sources</th>
                                 <th>Actions</th>
                             </tr>
@@ -266,11 +286,13 @@ const EnergyEmissions = () => {
                                     <tr key={record._id}>
                                         <td>{index + 1}</td>
                                         {/* <td>{record.userId}</td> */}
-                                        <td>{[
+                                        {/* <td>{[
                                             "January", "February", "March", "April", "May", "June",
                                             "July", "August", "September", "October", "November", "December"
                                         ].filter((month, index) => index + 1 == record.month)}</td>
-                                        <td>{record.year}</td>
+                                        <td>{record.year}</td> */}
+                                        <td>{formatDateForListing(record.startDate)}</td>
+                                        <td>{formatDateForListing(record.endDate)}</td>
                                         <td>
                                             {record.energySources.map((source, i) => (
                                                 <div key={i} data-id={typeof source}>
@@ -317,7 +339,7 @@ const EnergyEmissions = () => {
                     <Modal.Body>
                         <Form>
                             {/* Month Selection */}
-                            <Form.Group className="mb-3">
+                            {/* <Form.Group className="mb-3">
                                 <Form.Label>Month</Form.Label>
                                 <Form.Control
                                     as="select"
@@ -331,10 +353,10 @@ const EnergyEmissions = () => {
                                         </option>
                                     ))}
                                 </Form.Control>
-                            </Form.Group>
+                            </Form.Group> */}
 
                             {/* Year Selection */}
-                            <Form.Group className="mb-3">
+                            {/* <Form.Group className="mb-3">
                                 <Form.Label>Year</Form.Label>
                                 <Form.Control
                                     type="number"
@@ -342,6 +364,14 @@ const EnergyEmissions = () => {
                                     value={emissionRecord.year}
                                     onChange={(e) => handleInputChange(e, "year")}
                                 />
+                            </Form.Group> */}
+                            <Form.Group className="mb-3">
+                                <Form.Label>Start Date</Form.Label>
+                                <Form.Control type="date" value={emissionRecord.startDate} onChange={(e) => handleInputChange(e, "startDate")} />
+                            </Form.Group>
+                            <Form.Group className="mb-3">
+                                <Form.Label>End Date</Form.Label>
+                                <Form.Control type="date" value={emissionRecord.endDate} onChange={(e) => handleInputChange(e, "endDate")} />
                             </Form.Group>
 
                             {/* Energy Sources Section */}
@@ -397,7 +427,7 @@ const EnergyEmissions = () => {
                         <Modal.Body>
 
                             {/* Month */}
-                            <Form.Group controlId="month" className="mb-3">
+                            {/* <Form.Group controlId="month" className="mb-3">
                                 <Form.Label>Month</Form.Label>
                                 <Form.Control
                                     as="select"
@@ -413,10 +443,10 @@ const EnergyEmissions = () => {
                                         </option>
                                     ))}
                                 </Form.Control>
-                            </Form.Group>
+                            </Form.Group> */}
 
                             {/* Year */}
-                            <Form.Group controlId="year" className="mb-3">
+                            {/* <Form.Group controlId="year" className="mb-3">
                                 <Form.Label>Year</Form.Label>
                                 <Form.Control
                                     type="number"
@@ -424,8 +454,16 @@ const EnergyEmissions = () => {
                                     onChange={(e) => handleInputChange(e, "year")}
                                     placeholder="Enter year"
                                 />
-                            </Form.Group>
+                            </Form.Group> */}
 
+                                <Form.Group className="mb-3">
+                                    <Form.Label>Start Date</Form.Label>
+                                    <Form.Control type="date" value={formatDate(emissionRecord.startDate)} onChange={(e) => handleInputChange(e, "startDate")} />
+                                </Form.Group>
+                                <Form.Group className="mb-3">
+                                    <Form.Label>End Date</Form.Label>
+                                    <Form.Control type="date" value={formatDate(emissionRecord.endDate)} onChange={(e) => handleInputChange(e, "endDate")} />
+                                </Form.Group>
                             {/* Energy Sources (Dynamic) */}
                             <Form.Group controlId="energySources" className="mb-3">
                                 <Form.Label>Energy Sources</Form.Label>
