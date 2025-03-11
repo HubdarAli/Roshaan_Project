@@ -117,30 +117,40 @@ const DashboardPage = () => {
 
   const fetchVehicles = async () => {
     try {
-      const response = await fetch(`${REACT_APP_API_URL}/vehicles`, {
+      // ✅ Get the user ID from localStorage
+      const storedUserData = localStorage.getItem("userObj");
+      const userData = storedUserData ? JSON.parse(storedUserData) : null;
+      const userId = userData?._id; // Ensure this exists
+  
+      if (!userId) {
+        throw new Error("User ID not found");
+      }
+  
+      const response = await fetch(`${REACT_APP_API_URL}/vehicles?owner=${userId}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${JWT_ADMIN_SECRET}`,
         },
       });
-
+  
       if (!response.ok) {
         throw new Error("Failed to fetch vehicles");
       }
-
+  
       const data = await response.json();
-
+  
       if (!Array.isArray(data)) {
         throw new Error("Invalid response format");
       }
-
+  
       setVehicles(data);
     } catch (err) {
       console.error("Error fetching vehicles:", err.message);
       setError(err.message);
     }
   };
+  
 
   useEffect(() => {
     fetchVehicles();
@@ -960,27 +970,31 @@ const DashboardPage = () => {
               <p>Total: {vehicles.length}</p>
             </div>
             <table className="table table-striped table-bordered table-hover">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Name</th>
-                  <th>Home Address</th>
-                  <th>Company Address</th>
-                  <th>Transportation Mode</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {vehicles.length > 0 ? (
-                  vehicles.map((vehicle, index) => (
-                    <tr key={vehicle._id}>
-                      <td>{index + 1}</td>
-                      <td>{`${vehicle.firstName} ${vehicle.lastName}`}</td>
-                      <td>{vehicle.homeAddress}</td>
-                      <td>{vehicle.companyAddress}</td>
-                      <td>{vehicle.car?.name || "N/A"}</td>
-                      <td>
-                        <button
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Vehicle Name</th>
+                <th>License Plate</th>
+                <th>Vehicle Type</th>
+                <th>Engine Number</th>
+                <th>Vehicle Use</th>
+                <th>Vehicle Model</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {vehicles.length > 0 ? (
+                vehicles.map((vehicle, index) => (
+                  <tr key={vehicle._id}>
+                    <td>{index + 1}</td>
+                    <td>{vehicle.vehicleName || "N/A"}</td>
+                    <td>{vehicle.licensePlate || "N/A"}</td>
+                    <td>{vehicle.vehicleType || "N/A"}</td>
+                    <td>{vehicle.engineNumber || "N/A"}</td>
+                    <td>{vehicle.vehicleUseFor || "N/A"}</td>
+                    <td>{vehicle.vehicleModel || "N/A"}</td>
+                    <td>
+                    <button
                           className={`btn w-100 p-8   ${
                             vehicle.isFavorite
                               ? "btn-warning"
@@ -992,24 +1006,17 @@ const DashboardPage = () => {
                             ? "★ Favorite"
                             : "☆ Mark as Favorite"}
                         </button>
-
-                        {/* <button className="btn btn-info btn-sm me-2" onClick={() => editVehicle(vehicle)}>
-                                Edit
-                              </button>
-                              <button className="btn btn-danger btn-sm" onClick={() => deleteVehicle(vehicle._id)}>
-                                Delete
-                              </button> */}
-                      </td>
-                    </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td colSpan="6" className="text-center text-muted">
-                      No records found
                     </td>
                   </tr>
-                )}
-              </tbody>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="8" className="text-center text-muted">
+                    No records found
+                  </td>
+                </tr>
+              )}
+            </tbody>
             </table>
           </div>
         </div>
