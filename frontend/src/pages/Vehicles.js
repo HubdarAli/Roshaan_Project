@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { JWT_ADMIN_SECRET, REACT_APP_API_URL } from "../env";
+import {
+  JWT_ADMIN_SECRET,
+  JWT_EMPLOYEE_SECRET,
+  REACT_APP_API_URL,
+} from "../env";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FaHome, FaPlusCircle } from "react-icons/fa";
 import VehicleRegisterPage from "./VehicleRegister";
@@ -126,10 +130,12 @@ const VehiclePage = () => {
             <thead>
               <tr>
                 <th>#</th>
-                <th>Name</th>
-                <th>Home Address</th>
-                <th>Company Address</th>
-                <th>Transportation Mode</th>
+                <th>Vehicle Name</th>
+                <th>License Plate</th>
+                <th>Vehicle Type</th>
+                <th>Engine Number</th>
+                <th>Vehicle Use</th>
+                <th>Vehicle Model</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -138,10 +144,12 @@ const VehiclePage = () => {
                 vehicles.map((vehicle, index) => (
                   <tr key={vehicle._id}>
                     <td>{index + 1}</td>
-                    <td>{`${vehicle.firstName} ${vehicle.lastName}`}</td>
-                    <td>{vehicle.homeAddress}</td>
-                    <td>{vehicle.companyAddress}</td>
-                    <td>{vehicle.car?.name || "N/A"}</td>
+                    <td>{vehicle.vehicleName || "N/A"}</td>
+                    <td>{vehicle.licensePlate || "N/A"}</td>
+                    <td>{vehicle.vehicleType || "N/A"}</td>
+                    <td>{vehicle.engineNumber || "N/A"}</td>
+                    <td>{vehicle.vehicleUseFor || "N/A"}</td>
+                    <td>{vehicle.vehicleModel || "N/A"}</td>
                     <td>
                       <button
                         className="btn btn-info btn-sm me-2"
@@ -160,7 +168,7 @@ const VehiclePage = () => {
                 ))
               ) : (
                 <tr>
-                  <td colSpan="6" className="text-center text-muted">
+                  <td colSpan="8" className="text-center text-muted">
                     No records found
                   </td>
                 </tr>

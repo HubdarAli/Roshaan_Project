@@ -27,6 +27,9 @@ const LoginPage = () => {
         alert("Invalid credentials");
       }
       const data = await response?.json();
+      console.log(data,"dtaa")
+      localStorage.setItem("userData", JSON.stringify(data.user));
+
       if (data?.role === "admin") {
         localStorage.setItem("userObj", JSON.stringify(data?.user));
         localStorage.setItem("token", data.jwtToken);
