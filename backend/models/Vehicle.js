@@ -3,15 +3,21 @@ const jwt = require("jsonwebtoken");
 
 const vehicleSchema = new mongoose.Schema(
   {
-    firstName: { type: String, required: true },
-    lastName: { type: String, required: true },
-    homeAddress: { type: String, required: true },
-    companyAddress: { type: String, required: true },
-    email: { type: String, required: true, unique: true, lowercase: true },
-    password: { type: String, required: true },
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    vehicleName: { type: String, required: true },
+    licensePlate: { type: String, required: true, unique: true },
+    vehicleType: {
+      type: String,
+      enum: ["Car", "Bike", "Truck", "Other"],
+    },
+    engineNumber: { type: String, required: true,  },
+    vehicleModel: { type: String, required: true },
+    vehicleUseFor: {
+      type: String,
+      required: true,
+      enum: ["Personal", "Company"],
+    },
+    owner: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     isFavorite: { type: Boolean, default: false },
-    car: { type: mongoose.Schema.Types.ObjectId, ref: "Transportation" },
     jwtToken: {
       type: String, // Field to store JWT token
       default: function () {
