@@ -63,6 +63,9 @@ const EmployeePage = () => {
       }
     }
   };
+  const employeeDetails = async (id) => {
+    navigate(`/employee-details/${id}`)
+  };
 
   // Edit employee function
   const editEmployee = (user) => {
@@ -151,19 +154,19 @@ const EmployeePage = () => {
                     <td>{employee.homeAddress}</td>
                     <td>{employee.companyAddress}</td>
                     <td>{employee.car?.name || "N/A"}</td>
-                    <td>
-                      <button
-                        className="btn btn-info btn-sm me-2"
-                        onClick={() => editEmployee(employee)}
-                      >
+                    <td className="">
+                    <div className="d-flex gap-2">
+                      <button className="btn btn-info btn-sm" onClick={() => editEmployee(employee)}>
                         Edit
                       </button>
-                      <button
-                        className="btn btn-danger btn-sm"
-                        onClick={() => deleteEmployee(employee._id)}
-                      >
+                      <button className="btn btn-danger btn-sm" onClick={() => deleteEmployee(employee._id)}>
                         Delete
                       </button>
+                      <button className="btn btn-warning btn-sm" onClick={() => employeeDetails(employee._id)}>
+                        View Details
+                      </button>
+                    </div>
+
                     </td>
                   </tr>
                 ))

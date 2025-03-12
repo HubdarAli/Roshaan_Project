@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
@@ -10,10 +10,13 @@ import {
 import UpdateEmployee from "./UpdateEmployee";
 import Select from "react-select";
 import TransportEmissions from "./TransportEmissions";
-import { FaPlusCircle } from "react-icons/fa";
+import { FaArrowLeft, FaPlusCircle, FaUserPlus } from "react-icons/fa";
 import VehicleRegisterPage from "./VehicleRegister";
 
 const DashboardPage = () => {
+  const { id } = useParams(); // Extract ID from URL
+
+  const [ employeeId , setEmployeeId ] = useState(id??null);
   const customStyles = {
     control: (provided) => ({
       ...provided,
@@ -189,7 +192,7 @@ const DashboardPage = () => {
         const records = await response.json();
         // Filter records for the logged-in user
         const filteredRecords = records.data.filter(
-          (record) => record?.employeeId === userObj._id
+          (record) => (employeeId ? record?.employeeId === employeeId : record?.employeeId === userObj._id)
         );
 
         // Update state with filtered records
@@ -225,7 +228,7 @@ const DashboardPage = () => {
 
         const records = await response.json();
         const filteredRecords = records.data.filter(
-          (record) => record?.employeeId === userObj._id
+          (record) => (employeeId ? record?.employeeId === employeeId : record?.employeeId === userObj._id)
         );
 
         setWorkTransportationData(filteredRecords);
@@ -259,12 +262,12 @@ const DashboardPage = () => {
         const userObj = JSON.parse(localStorage.getItem("userObj"));
         if (activeTab === "transport") {
           const filteredRecords = globalTransportationData.filter(
-            (record) => record?.employeeId === userObj._id
+            (record) => (employeeId ? record?.employeeId === employeeId : record?.employeeId === userObj._id)
           );
           setEmployeeTransListing(filteredRecords);
         } else {
           const filteredRecords = globalWorkTransportationData.filter(
-            (record) => record?.employeeId === userObj._id
+            (record) => (employeeId ? record?.employeeId === employeeId : record?.employeeId === userObj._id)
           );
           setWorkTransportationData(filteredRecords);
         }
@@ -322,7 +325,7 @@ const DashboardPage = () => {
         }
 
         const response = await axios.get(
-          `${REACT_APP_API_URL}/user-emissions/${userObj._id}`
+          `${REACT_APP_API_URL}/user-emissions/${(employeeId ? employeeId : userObj._id)}`
         );
 
         if (response.status === 200) {
@@ -440,7 +443,7 @@ const DashboardPage = () => {
       ...prev,
       beginLocation: userObj?.homeAddress,
       endLocation: userObj?.companyAddress,
-      employeeId: userObj?._id,
+      employeeId: (employeeId ? employeeId : userObj._id),
     }));
     setIsTransportationModalVisible(true);
   };
@@ -501,7 +504,7 @@ const DashboardPage = () => {
         `${REACT_APP_API_URL}/user-emissions`,
         {
           ...newResourceData,
-          userId: userObj._id,
+          userId: (employeeId ? employeeId : userObj._id),
         },
         {
           headers: {
@@ -618,7 +621,17 @@ const DashboardPage = () => {
         className={`navbar navbar-expand-lg navbar-${theme} bg-${theme} mb-4`}
       >
         <div className="container-fluid">
-          <span className="navbar-brand d-flex align-items-center">
+          {employeeId ? <div className="d-flex justify-content-between align-items-center">
+                      
+                      <button
+                        className="btn btn-outline-secondary d-flex align-items-center px-4 py-1 rounded-3 shadow-sm hover-shadow"
+                        onClick={() => navigate('/employees')}
+                        style={{ marginBottom: "13px" }}
+                      >
+                        <FaArrowLeft className="me-1" />
+                          Employees
+                      </button>
+                    </div> : <span className="navbar-brand d-flex align-items-center">
             <i className="fas fa-hand-peace me-2"></i>
             <div>
               <span
@@ -637,7 +650,7 @@ const DashboardPage = () => {
                 It's a great day to be productive! ✨
               </span>
             </div>
-          </span>
+          </span>}
           <div className="container mt-3">
             <div className="row justify-content-between align-items-center">
               <div className="col-auto">
